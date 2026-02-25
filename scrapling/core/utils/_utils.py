@@ -12,7 +12,7 @@ from functools import lru_cache  # isort:skip
 
 html_forbidden = (html.HtmlComment,)
 
-__CLEANING_TABLE__ = str.maketrans({"\t": " ", "\n": None, "\r": None})
+__CLEANING_TABLE__ = str.maketrans({"\t": " ", "\n": " ", "\r": " "})
 __CONSECUTIVE_SPACES_REGEX__ = re_compile(r" +")
 
 
@@ -115,6 +115,6 @@ class _StorageTools:
 
 
 @lru_cache(128, typed=True)
-def clean_spaces(string):
+def clean_spaces(string: str) -> str:
     string = string.translate(__CLEANING_TABLE__)
     return __CONSECUTIVE_SPACES_REGEX__.sub(" ", string)
